@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"log"
 
@@ -34,9 +33,10 @@ saveClip view --priority highest`,
 		if err != nil {
 			log.Fatal(err)
 		}
-		
-		if len(clips) == 0 {
-			err = errors.New("your list is empty use the save command to add a clip to it")
+
+		err = utils.AreClipsEmpty(clips)
+
+		if err != nil {
 			log.Fatal(err)
 		}
 
