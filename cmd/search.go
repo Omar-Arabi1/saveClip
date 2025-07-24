@@ -1,8 +1,13 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
+	"log"
 
+	"github.com/Omar-Arabi1/saveClip/internal/models"
+	"github.com/Omar-Arabi1/saveClip/internal/utils"
+	"github.com/lithammer/fuzzysearch/fuzzy"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +21,48 @@ the query itself will be part of the label name not the copied text itself, For 
 
 saveClip search <query>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("search called")
+		var expectedArgsNum int = 1
+		err := utils.GotExpectedArgs(args, expectedArgsNum)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		query := args[0]
+
+		var clips []models.Clip
+		clips, err = utils.ReadJson()
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		err = utils.AreClipsEmpty(clips)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		var clipsText []string
+
+		for _, clip := range clips {
+			clipsText = append(clipsText, clip.Label)
+		}
+
+		matches := fuzzy.Find(query, clipsText)
+
+		if len(matches) == 0 {
+			err = errors.New("No clipboard label matched your query")
+			log.Fatal(err)
+		}
+		
+		for _, clip := range clips {
+			for _, match := range matches {
+				if clip.Label == match {
+					fmt.Printf("Label: %s - Has Entery: %s\n", clip.Label, clip.Body)
+				}
+			}
+		}
 	},
 }
 
