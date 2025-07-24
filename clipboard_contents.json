@@ -4,5 +4,23 @@
     "label": "beaver",
     "priority": 3,
     "creationDate": "2025-7-24"
+  },
+  {
+    "body": "🦀",
+    "label": "crab",
+    "priority": 1,
+    "creationDate": "2025-7-24"
+  },
+  {
+    "body": "🐍",
+    "label": "snake",
+    "priority": 3,
+    "creationDate": "2025-7-24"
+  },
+  {
+    "body": "snake",
+    "label": "snakeText",
+    "priority": 3,
+    "creationDate": "2025-7-24"
   }
 ]

@@ -9,6 +9,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// TODO: implement the two sort options
+
 var viewCmd = &cobra.Command{
 	Use:   "view",
 	Short: "See all your enteries inside the list",

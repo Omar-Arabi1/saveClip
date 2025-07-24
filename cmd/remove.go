@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// TODO: implement the two option --all and --remove-priority
+
 var removeCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes an item from your list",
