@@ -8,7 +8,7 @@ import (
 
 var searchCmd = &cobra.Command{
 	Use:   "search",
-	Short: "fuzzy searches through your list by the givin query",
+	Short: "Fuzzy searches through your list by the given query",
 	Long: `fuzzy searches through your entire list with a query to search with
 it will print out the labels with that query inside
 

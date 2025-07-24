@@ -1,0 +1,20 @@
+[
+  {
+    "body": "🦫",
+    "label": "beaver",
+    "priority": 2,
+    "creationDate": "2025-7-24"
+  },
+  {
+    "body": "🦀",
+    "label": "crab",
+    "priority": 2,
+    "creationDate": "2025-7-24"
+  },
+  {
+    "body": "🐍",
+    "label": "snake",
+    "priority": 1,
+    "creationDate": "2025-7-24"
+  }
+]
