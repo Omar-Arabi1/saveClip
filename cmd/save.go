@@ -23,16 +23,17 @@ accessing, removing so I suggest choosing short one word discreptive names, For 
 
 saveClip save <label> --priority <priority>
 
-keep in mind that the label and the text in your clipboard  to save must be unique`,
+keep in mind that the label and the text in your clipboard to save must be unique`,
 	Run: func(cmd *cobra.Command, args []string) {
-		clips, err := utils.ReadJson()
+		expectedArgsNum := 1
+		err := utils.GotExpectedArgs(args, expectedArgsNum)
 
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		expectedArgsNum := 1
-		err = utils.GotExpectedArgs(args, expectedArgsNum)
+		var clips []models.Clip
+		clips, err = utils.ReadJson()
 
 		if err != nil {
 			log.Fatal(err)
@@ -80,7 +81,7 @@ keep in mind that the label and the text in your clipboard  to save must be uniq
 			Priority:     priority,
 			CreationDate: currentDate,
 		}
-		
+
 		for _, clip := range clips {
 			if clip.Body == newClip.Body {
 				err = errors.New("the text you are trying to save already exists")
@@ -92,7 +93,7 @@ keep in mind that the label and the text in your clipboard  to save must be uniq
 		}
 
 		clips = append(clips, newClip)
-		
+
 		err = utils.WriteJson(clips)
 
 		if err != nil {
