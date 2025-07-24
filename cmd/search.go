@@ -11,6 +11,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// TODO: add the filter option
+
 var searchCmd = &cobra.Command{
 	Use:   "search",
 	Short: "Fuzzy searches through your list by the given query",
