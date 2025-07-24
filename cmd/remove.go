@@ -21,14 +21,43 @@ the same priority. For example:
 
 saveClip remove <label>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		var expectedArgsNum int = 1
-		err := utils.GotExpectedArgs(args, expectedArgsNum)
+		removeAll, err := cmd.Flags().GetBool("all")
+
+		if removeAll == true {
+			err = utils.WriteJson([]models.Clip{})
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println("Removed all clips successfully")
+			return
+		}
+
+		var removePriority int
+		removePriority, err = cmd.Flags().GetInt("remove-priority")
 
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		label := args[0]
+		var label string
+
+		if removePriority == 0 {
+			var expectedArgsNum int = 1
+			err = utils.GotExpectedArgs(args, expectedArgsNum)
+
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			label = args[0]
+		} else {
+			var expectedArgsNum int = 0
+			err = utils.GotExpectedArgs(args, expectedArgsNum)
+
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
 
 		var clips []models.Clip
 		clips, err = utils.ReadJson()
@@ -46,13 +75,15 @@ saveClip remove <label>`,
 		var newClips []models.Clip
 
 		for _, clip := range clips {
-			if clip.Label != label {
+			if clip.Label != label && removePriority == 0{
+				newClips = append(newClips, clip)
+			} else if clip.Priority != removePriority && removePriority != 0 {
 				newClips = append(newClips, clip)
 			}
 		}
 
 		if len(newClips) == len(clips) {
-			err = errors.New("didn't find any clip with the given label")
+			err = errors.New("didn't remove any clips")
 			log.Fatal(err)
 		}
 
@@ -62,10 +93,12 @@ saveClip remove <label>`,
 			log.Fatal(err)
 		}
 
-		fmt.Println("Removed the entery successfully")
+		fmt.Println("The removal was successfully")
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(removeCmd)
+	removeCmd.Flags().BoolP("all", "a", false, "remove all clips at once")
+	removeCmd.Flags().IntP("remove-priority", "p", 0, "remove all clips that have the given priority")
 }
