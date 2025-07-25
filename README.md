@@ -52,3 +52,9 @@ this will put the last entered clip to your clipboard history
 `saveClip access -l <label>`
 
 this will put the clip that has the entered label to your clipboard history
+
+## save command
+view the [overview](#overview) section at the top
+
+## access command
+view the [overview](#overview) section at the top
