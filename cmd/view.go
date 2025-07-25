@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"log"
 
@@ -22,8 +23,14 @@ For example:
 
 saveClip view --priority highest`,
 	Run: func(cmd *cobra.Command, args []string) {
+		sortBy, err := cmd.Flags().GetString("priority")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		var expectedArgsNum int = 0
-		err := utils.GotExpectedArgs(args, expectedArgsNum)
+		err = utils.GotExpectedArgs(args, expectedArgsNum)
 
 		if err != nil {
 			log.Fatal(err)
@@ -42,6 +49,21 @@ saveClip view --priority highest`,
 			log.Fatal(err)
 		}
 
+		switch sortBy {
+		case "":
+			break
+		case "highest":
+			sortHighest := true
+			utils.SortPriority(clips, sortHighest)
+		case "lowest":
+			sortHighest := false
+			utils.SortPriority(clips, sortHighest)
+		default:
+			errMessage := fmt.Sprintf("expected highest/lowest got %s", sortBy)
+			err = errors.New(errMessage)
+			log.Fatal(err)
+		}
+
 		for _, clip := range clips {
 			fmt.Printf("Created at: %s - Label: %s - content: %s - Priority: %d\n", clip.CreationDate, clip.Label, clip.Body, clip.Priority)
 		}
@@ -50,4 +72,5 @@ saveClip view --priority highest`,
 
 func init() {
 	rootCmd.AddCommand(viewCmd)
+	viewCmd.Flags().StringP("priority", "p", "", "see the list sorted by priority which takes in either a highest or lowest")
 }
