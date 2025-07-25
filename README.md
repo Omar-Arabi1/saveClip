@@ -25,7 +25,8 @@ and giving it a number the number entered will be in this range 1 min - 3 max
 
 
 by default the entery will be saved with a priority of 1 unless you set it manually
-to something else using the option, Example
+to something else using the option, the tool will provide the clip with a creation date
+YYYY-MM-DD this will have some use cases in other commands, Example
 
 
 `saveClip save <label> --priority 3`
@@ -65,7 +66,7 @@ view the [overview](#overview) section at the top
 ## remove command:
 this command will allow you to remove a clip from your list by providing it with a label as an argument
 you could also use one of two options `--all` this will remove the entire list at once while `--remove-priority`
-this will remove all the clips with the given priority, Example
+will remove all the clips with the given priority, Example
 
 
 `saveClip remove <label>`
@@ -84,3 +85,30 @@ this will remove all the clips at once
 
 
 this will remove all clips with the priority of 3
+
+## view:
+this will show to you all clips, enteries, creation dates, labels and priorities
+it takes in nothing, but you could provide it with one of two options `--priority`
+this takes in `highest` or `lowest` and it will show to you the list sorted by priority
+
+
+it also takes in a `--date` option which takes in `newest` or `oldest` this will show to you
+the list sorted by date, Example
+
+
+`saveClip view`
+
+
+this will show to you all the clips with the order they are saved in
+
+
+`saveClip view --priority highest`
+
+
+this will show to you all the clips sorted from highest to lowest by priority
+
+
+`saveClip view --date newest`
+
+
+this will show to you all the clips sorted from newest to oldest by date
