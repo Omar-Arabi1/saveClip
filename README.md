@@ -4,6 +4,9 @@ a clipboard manager tool to save only the things you care about —*this is a pr
 
 install with `go install github.com/Omar-Arabi1/saveClip@latest`
 
+
+this app works on both windows, macOS and Linux
+
 ## table of contents:
 - [overview](#overview)
 - [save command](#save-command)
@@ -12,6 +15,7 @@ install with `go install github.com/Omar-Arabi1/saveClip@latest`
 - [view command](#view-command)
 - [search command](#search-command)
 - [notes](#notes)
+- [dependencies](#dependencies)
 
 ## overview:
 you will mostly use these commands the `save` and `access` commands
@@ -133,3 +137,17 @@ this will show to you all the labels that match the query and what is saved insi
 
 
 this will show to you all the labels that match the query and have the creation date 2025-07-25
+
+## notes:
+the app saves your clips inside of a hidden file in the home directory named clips.json
+
+## dependencies:
+this app doesn't have dependencies on windows or macOS, but for linux there are dependencies
+if you are on X11 you must install one of the following `libx11-dev` or `xorg-dev` or `libX11-devel`, but
+if you are on wayland the app isn't supported so you must use XWayland with one of the dependencies on top installed
+and make sure the DISPLAY variable is set, to make sure it is already set run `echo $DISPLAY` if it shows :0 or :1
+it is set if not it will not show anything
+
+---
+
+## Thanks for installing the tool
