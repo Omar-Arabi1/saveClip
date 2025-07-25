@@ -8,7 +8,8 @@ import (
 )
 
 func ReadJson() ([]models.Clip, error) {
-	data, err := os.ReadFile("clipboard_contents.json")
+	clipsPath := CreateDataFile()
+	data, err := os.ReadFile(clipsPath)
 
 	if err != nil {
 		return []models.Clip{}, err

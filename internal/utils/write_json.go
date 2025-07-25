@@ -14,7 +14,8 @@ func WriteJson(data []models.Clip) error {
 		return err
 	}
 	
-	err = os.WriteFile("clipboard_contents.json", marshaledData, 0644)
+	clipsPath := CreateDataFile()
+	err = os.WriteFile(clipsPath, marshaledData, 0644)
 	
 	if err != nil {
 		return err
