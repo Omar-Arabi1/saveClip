@@ -1,6 +1,9 @@
 # saveClip
 a clipboard manager tool to save only the things you care about —*this is a project I already made in python and I am remaking in golang for better performance and personal practice*
 
+
+install with `go install github.com/Omar-Arabi1/saveClip@latest`
+
 ## table of contents:
 - [overview](#overview)
 - [save command](#save-command)
@@ -53,8 +56,31 @@ this will put the last entered clip to your clipboard history
 
 this will put the clip that has the entered label to your clipboard history
 
-## save command
+## save command:
 view the [overview](#overview) section at the top
 
-## access command
+## access command:
 view the [overview](#overview) section at the top
+
+## remove command:
+this command will allow you to remove a clip from your list by providing it with a label as an argument
+you could also use one of two options `--all` this will remove the entire list at once while `--remove-priority`
+this will remove all the clips with the given priority, Example
+
+
+`saveClip remove <label>`
+
+
+this will remove the clip at the given label
+
+
+`saveClip remove --all`
+
+
+this will remove all the clips at once
+
+
+`saveClip remove --remove-priority 3`
+
+
+this will remove all clips with the priority of 3
