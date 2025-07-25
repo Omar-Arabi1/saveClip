@@ -11,7 +11,7 @@ a clipboard manager tool to save only the things you care about —*this is a pr
 - [notes](#notes)
 
 ## overview:
-you will mostly do these commands the `save` and `access` commands
+you will mostly use these commands the `save` and `access` commands
 the `save` command will save the entery at the top of your clipboard history
 you will have to provide it with a label as an argument
 
@@ -29,9 +29,26 @@ to something else using the option, Example
 
 
 this will save the entery at the top of your clipboard with the label given and a priority
-level of 3, *note that all the operations like searching or viewing which will be discussed later
-so its recommended to save with a short one word descriptive label*
+level of 3, *note that all the operations like removing or viewing which will be discussed later
+use the label as eitehr arguemnts or options, so its recommended to save with a short one word descriptive 
+label*
 
 
 *note that we will call the entery which means that the saved entery with the label and priority will 
 be called a **Clip** so the saved entery at the top example is called a Clip*
+
+
+as for the `access` command this will put a clip to your clipboard history, by default it will put
+the last entered clip to your clipboard history, you could override this behaviour by providing it with
+a label to a clip you want to put to your clipboard history using the `--label` option, Example
+
+
+`saveClip access`
+
+
+this will put the last entered clip to your clipboard history
+
+
+`saveClip access -l <label>`
+
+this will put the clip that has the entered label to your clipboard history
