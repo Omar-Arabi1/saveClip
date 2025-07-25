@@ -9,10 +9,8 @@ func GetCurrentDate() string {
 	var currentTime time.Time = time.Now()
 
 	var currentYear int = currentTime.Year()
-	var currentMonth int = int(currentTime.Month())
-	var currentDay int = currentTime.Day()
-	
-	var currentTimeFormatted string = fmt.Sprintf("%d-%d-%d", currentYear, currentMonth, currentDay)
+	var currentMonth string = fmt.Sprintf("%02d", int(currentTime.Month()))
+	var currentDay string = fmt.Sprintf("%02d", currentTime.Day())
 
-	return currentTimeFormatted
+	return fmt.Sprintf("%v-%v-%v", currentYear, currentMonth, currentDay)
 }

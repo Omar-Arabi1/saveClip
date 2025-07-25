@@ -16,7 +16,7 @@ var saveCmd = &cobra.Command{
 	Short: "Save the last thing in your clipboard history with a label and a priority",
 	Long: `Save the last thing in your clipboard history with a label and a priority,
 the priority is optional it takes numbers in this range 1 min and 3 max, but the label is
-mandatory, the app will automatically save all the enteries with a creation date Y-M-D
+mandatory, the app will automatically save all the enteries with a creation date YYYY-MM-DD
 
 keep in mind that all of the operations in this program will use the label for searching,
 accessing, removing so I suggest choosing short one word discreptive names, For example:

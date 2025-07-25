@@ -78,5 +78,5 @@ saveClip search <query>`,
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
-	searchCmd.Flags().StringP("filter", "f", "", "filter the results only if they were created at the given date Y-M-D")
+	searchCmd.Flags().StringP("filter", "f", "", "filter the results only if they were created at the given date YYYY-MM-DD")
 }

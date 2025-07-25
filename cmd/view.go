@@ -10,8 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// TODO: implement the two sort options
-
 var viewCmd = &cobra.Command{
 	Use:   "view",
 	Short: "See all your enteries inside the list",
@@ -23,7 +21,14 @@ For example:
 
 saveClip view --priority highest`,
 	Run: func(cmd *cobra.Command, args []string) {
-		sortBy, err := cmd.Flags().GetString("priority")
+		sortByPriority, err := cmd.Flags().GetString("priority")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		var sortByDate string
+		sortByDate, err = cmd.Flags().GetString("date")
 
 		if err != nil {
 			log.Fatal(err)
@@ -49,7 +54,7 @@ saveClip view --priority highest`,
 			log.Fatal(err)
 		}
 
-		switch sortBy {
+		switch sortByPriority {
 		case "":
 			break
 		case "highest":
@@ -59,7 +64,22 @@ saveClip view --priority highest`,
 			sortHighest := false
 			utils.SortPriority(clips, sortHighest)
 		default:
-			errMessage := fmt.Sprintf("expected highest/lowest got %s", sortBy)
+			errMessage := fmt.Sprintf("expected highest/lowest got %s", sortByPriority)
+			err = errors.New(errMessage)
+			log.Fatal(err)
+		}
+
+		switch sortByDate {
+		case "":
+			break
+		case "newest":
+			sortNewest := true
+			utils.SortDate(clips, sortNewest)
+		case "oldest":
+			sortNewest := false
+			utils.SortDate(clips, sortNewest)
+		default:
+			errMessage := fmt.Sprintf("expected newest/oldest got %s", sortByPriority)
 			err = errors.New(errMessage)
 			log.Fatal(err)
 		}
@@ -73,4 +93,5 @@ saveClip view --priority highest`,
 func init() {
 	rootCmd.AddCommand(viewCmd)
 	viewCmd.Flags().StringP("priority", "p", "", "see the list sorted by priority which takes in either a highest or lowest")
+	viewCmd.Flags().StringP("date", "d", "", "see the list sorted by date which takes in either a newest or oldest")
 }
