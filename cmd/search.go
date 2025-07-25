@@ -54,7 +54,7 @@ saveClip search <query>`,
 		matches := fuzzy.Find(query, clipsText)
 
 		if len(matches) == 0 {
-			err = errors.New("No clipboard label matched your query")
+			err = errors.New("no clipboard label matched your query")
 			log.Fatal(err)
 		}
 		

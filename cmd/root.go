@@ -6,8 +6,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-
-
 var rootCmd = &cobra.Command{
 	Use:   "saveClip",
 	Short: "a clipboard manager to save only imporant things to you",
@@ -29,5 +27,3 @@ func Execute() {
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
-
-

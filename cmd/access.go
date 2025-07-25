@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"slices"
@@ -22,8 +23,14 @@ access
 
 saveClip remove --label <label>`,
 	Run: func(cmd *cobra.Command, args []string) {
+		label, err := cmd.Flags().GetString("label")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		var expectedArgsNum int = 0
-		err := utils.GotExpectedArgs(args, expectedArgsNum)
+		err = utils.GotExpectedArgs(args, expectedArgsNum)
 
 		if err != nil {
 			log.Fatal(err)
@@ -47,15 +54,30 @@ saveClip remove --label <label>`,
 			log.Fatal(err)
 		}
 
+		var copiedClipBody string
+
 		for _, clip := range slices.Backward(clips) {
-			clipboard.Write(clipboard.FmtText, []byte(clip.Body))
-			fmt.Printf("copied %s into your clipboard\n", clip.Body)
-			time.Sleep(30 * time.Millisecond)
-			return
+			if label == "" {
+				copiedClipBody = clip.Body
+				break
+			} else if clip.Label == label {
+				copiedClipBody = clip.Body
+				break
+			}
 		}
+
+		if copiedClipBody == "" {
+			err = errors.New("could not find a clip with the given label")
+			log.Fatal(err)
+		}
+
+		clipboard.Write(clipboard.FmtText, []byte(copiedClipBody))
+		fmt.Printf("copied %s into your clipboard\n", copiedClipBody)
+		time.Sleep(30 * time.Millisecond)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(accessCmd)
+	accessCmd.Flags().StringP("label", "l", "", "choose a different clip to access by providing its label")
 }

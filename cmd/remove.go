@@ -10,8 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// TODO: implement the two option --all and --remove-priority
-
 var removeCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes an item from your list",
@@ -23,7 +21,11 @@ saveClip remove <label>`,
 	Run: func(cmd *cobra.Command, args []string) {
 		removeAll, err := cmd.Flags().GetBool("all")
 
-		if removeAll == true {
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if removeAll {
 			err = utils.WriteJson([]models.Clip{})
 			if err != nil {
 				log.Fatal(err)
