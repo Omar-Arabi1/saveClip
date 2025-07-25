@@ -23,8 +23,14 @@ the query itself will be part of the label name not the copied text itself, For 
 
 saveClip search <query>`,
 	Run: func(cmd *cobra.Command, args []string) {
+		filterDate, err := cmd.Flags().GetString("filter")
+		
+		if err != nil {
+			log.Fatal(err)
+		}
+		
 		var expectedArgsNum int = 1
-		err := utils.GotExpectedArgs(args, expectedArgsNum)
+		err = utils.GotExpectedArgs(args, expectedArgsNum)
 
 		if err != nil {
 			log.Fatal(err)
@@ -48,7 +54,11 @@ saveClip search <query>`,
 		var clipsText []string
 
 		for _, clip := range clips {
-			clipsText = append(clipsText, clip.Label)
+			if filterDate == "" {
+				clipsText = append(clipsText, clip.Label)
+			} else if clip.CreationDate == filterDate {
+				clipsText = append(clipsText, clip.Label)
+			}
 		}
 
 		matches := fuzzy.Find(query, clipsText)
@@ -70,4 +80,5 @@ saveClip search <query>`,
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
+	searchCmd.Flags().StringP("filter", "f", "", "filter the results only if they were created at the given date Y-M-D")
 }
