@@ -112,3 +112,24 @@ this will show to you all the clips sorted from highest to lowest by priority
 
 
 this will show to you all the clips sorted from newest to oldest by date
+
+## search command:
+this will allow you to search through all your labels with a given query as an argument
+the search will be a fuzzy search taking only part of the label and showing to you the label and 
+what is saved inside of it,
+
+
+the command could also take a `--filter` option which takes in a date YYYY-MM-DD which will show to
+you only results that match the query and has the creation date you entered
+
+
+`saveClip search <query>`
+
+
+this will show to you all the labels that match the query and what is saved inside of them
+
+
+`saveClip search <query> --filter 2025-07-25`
+
+
+this will show to you all the labels that match the query and have the creation date 2025-07-25
