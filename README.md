@@ -33,7 +33,7 @@ YYYY-MM-DD this will have some use cases in other commands, Example
 
 
 this will save the entery at the top of your clipboard with the label given and a priority
-level of 3, *note that all the operations like removing or viewing which will be discussed later
+level of 3, *note that all the operations like [removing](#remove-command) or [viewing](#view-command) which will be discussed later
 use the label as eitehr arguemnts or options, so its recommended to save with a short one word descriptive 
 label*
 
