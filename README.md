@@ -86,7 +86,7 @@ this will remove all the clips at once
 
 this will remove all clips with the priority of 3
 
-## view:
+## view command:
 this will show to you all clips, enteries, creation dates, labels and priorities
 it takes in nothing, but you could provide it with one of two options `--priority`
 this takes in `highest` or `lowest` and it will show to you the list sorted by priority
