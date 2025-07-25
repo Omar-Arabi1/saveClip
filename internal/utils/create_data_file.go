@@ -14,22 +14,23 @@ func CreateDataFile() string {
 		log.Fatal(err)
 	}
 
-	clipsPath := filepath.Join(homeDir, ".clips.json")
+	clipsPath := filepath.Join(homeDir, "clips.json")
+	clipsPathHidden := SetHidden(clipsPath)
 
-	_, err = os.Stat(clipsPath)
+	_, err = os.Stat(clipsPathHidden)
 
 	if !errors.Is(err, os.ErrNotExist) {
-		return clipsPath
+		return clipsPathHidden
 	}
 
 	var file *os.File
-	file, err = os.Create(clipsPath)
+	file, err = os.Create(clipsPathHidden)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
 
-	os.WriteFile(clipsPath, []byte("[]"), 0664)
-	return clipsPath
+	os.WriteFile(clipsPathHidden, []byte("[]"), 0664)
+	return clipsPathHidden
 }
